@@ -4,10 +4,8 @@
 # /urlscan
 #
 # History:
-# 10-04-2015
-# Version 1.0.0: initial release
-# Version 1.0.1: reverse text passed to urlscan
-# Version 1.0.2: remove weechat color from messages
+# 28-01-2018
+# Version 1.0.0: Fork from urlview plugin
 
 import distutils.spawn
 import os
@@ -50,7 +48,7 @@ def main():
     if distutils.spawn.find_executable("urlscan") is None:
         return weechat.WEECHAT_RC_ERROR
 
-    if not weechat.register("urlscan", "Daniel Campoverde", "1.0", "MIT",
+    if not weechat.register("urlscan", "Daniel Campoverde", "1.0.0", "MIT",
                             "Use urlscan on the current buffer", "", ""):
         return weechat.WEECHAT_RC_ERROR
 
