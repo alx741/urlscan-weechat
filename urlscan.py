@@ -1,12 +1,12 @@
-# This weechat plugin pipes the current weechat buffer through urlview
+# This weechat plugin pipes the current weechat buffer through urlscan
 #
 # Usage:
-# /urlview
+# /urlscan
 #
 # History:
 # 10-04-2015
 # Version 1.0.0: initial release
-# Version 1.0.1: reverse text passed to urlview
+# Version 1.0.1: reverse text passed to urlscan
 # Version 1.0.2: remove weechat color from messages
 
 import distutils.spawn
@@ -15,7 +15,7 @@ import pipes
 import weechat
 
 
-def urlview(data, buf, args):
+def urlscan(data, buf, args):
     infolist = weechat.infolist_get("buffer_lines", buf, "")
     lines = []
     while weechat.infolist_next(infolist) == 1:
@@ -33,7 +33,7 @@ def urlview(data, buf, args):
         return weechat.WEECHAT_RC_OK
 
     if not weechat.config_is_set_plugin("command"):
-        weechat.config_set_plugin("command", "urlview")
+        weechat.config_set_plugin("command", "urlscan")
     command = weechat.config_get_plugin("command")
 
     text = "\n".join(reversed(lines))
@@ -47,15 +47,15 @@ def urlview(data, buf, args):
 
 
 def main():
-    if distutils.spawn.find_executable("urlview") is None:
+    if distutils.spawn.find_executable("urlscan") is None:
         return weechat.WEECHAT_RC_ERROR
 
-    if not weechat.register("urlview", "Keith Smiley", "1.0.2", "MIT",
-                            "Use urlview on the current buffer", "", ""):
+    if not weechat.register("urlscan", "Daniel Campoverde", "1.0", "MIT",
+                            "Use urlscan on the current buffer", "", ""):
         return weechat.WEECHAT_RC_ERROR
 
-    weechat.hook_command("urlview", "Pass the current buffer to urlview", "",
-                         "", "", "urlview", "")
+    weechat.hook_command("urlscan", "Pass the current buffer to urlscan", "",
+                         "", "", "urlscan", "")
 
 if __name__ == "__main__":
     main()
